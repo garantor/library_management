@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1144</width>
+    <width>1202</width>
     <height>523</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>90</x>
       <y>0</y>
-      <width>1051</width>
+      <width>1061</width>
       <height>491</height>
      </rect>
     </property>
@@ -39,7 +39,7 @@
      <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>130</x>
         <y>80</y>
         <width>1051</width>
         <height>381</height>
@@ -458,9 +458,6 @@
          <item row="0" column="1">
           <widget class="QLineEdit" name="lineEdit_7"/>
          </item>
-         <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox_7"/>
-         </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_10">
            <property name="font">
@@ -473,8 +470,8 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="QComboBox" name="comboBox_8"/>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="comboBox_7"/>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_12">
@@ -488,8 +485,8 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="QComboBox" name="comboBox_6"/>
+         <item row="2" column="1">
+          <widget class="QComboBox" name="comboBox_8"/>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="label_11">
@@ -503,8 +500,8 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="lineEdit_8"/>
+         <item row="3" column="1">
+          <widget class="QComboBox" name="comboBox_6"/>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_14">
@@ -517,6 +514,9 @@
             <string>Book Price</string>
            </property>
           </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="lineEdit_8"/>
          </item>
         </layout>
        </widget>
@@ -911,7 +911,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_7">
        <attribute name="title">
@@ -923,7 +923,7 @@
           <x>0</x>
           <y>111</y>
           <width>1051</width>
-          <height>291</height>
+          <height>301</height>
          </rect>
         </property>
         <property name="font">
@@ -1244,13 +1244,100 @@
      </size>
     </property>
    </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>0</y>
+      <width>311</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(106, 107, 115);</string>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label_15">
+     <property name="geometry">
+      <rect>
+       <x>64</x>
+       <y>60</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Segoe UI</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Change Theme</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_17">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>170</y>
+       <width>93</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_18">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>170</y>
+       <width>93</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_19">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>250</y>
+       <width>93</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_20">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>250</y>
+       <width>93</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1144</width>
+     <width>1202</width>
      <height>26</height>
     </rect>
    </property>
