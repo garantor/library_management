@@ -54,6 +54,13 @@ class MainApp(QMainWindow, ui):
         self.pushButton_11.clicked.connect(self.addNewUser)
         self.pushButton_12.clicked.connect(self.login)
 
+        self.pushButton_13.clicked.connect(self.EditUser)
+        self.pushButton_17.clicked.connect(self.dark_orange)
+        self.pushButton_18.clicked.connect(self.darkstyle)
+        self.pushButton_20.clicked.connect(self.maincss)
+        self.pushButton_19.clicked.connect(self.createdcss)
+
+
     def Show_Themes(self):
         self.groupBox_3.show()
 
@@ -191,7 +198,7 @@ class MainApp(QMainWindow, ui):
             self.statusBar().showMessage(username + ' added successfully')
 
         else:
-            self.statusBar().showMessage(' Please Enter a Valid password ')
+            self.label_16.setText('Please Enter Valid Password')
 
 
     def login(self):
@@ -202,15 +209,45 @@ class MainApp(QMainWindow, ui):
         usernme = self.lineEdit_18.text()
         password = self.lineEdit_19.text()
 
-        SQL = ''' SELECT users_name, users_password FROM users '''
+        SQL = ''' SELECT * FROM users '''
         self.cur.execute(SQL)
         data = self.cur.fetchall()
         for dat in data:
-            if usernme == dat[0] and password == dat[1]:
-                self.statusBar().showMessage('New User Added')
+            if usernme == dat[1] and password == dat[3]:
+                self.statusBar().showMessage('Welcome ' + usernme)
+                self.groupBox_4.setEnabled(True)
+
+                self.lineEdit_20.setText(dat[1])
+                self.lineEdit_21.setText(dat[2])
+                self.lineEdit_23.setText(dat[3])
 
     def EditUser(self):
-        pass
+        username = self.lineEdit_20.text()
+        email = self.lineEdit_21.text()
+        password = self.lineEdit_23.text()
+        password_again = self.lineEdit_22.text()
+
+        login_name = self.lineEdit_18.text()
+
+        if password == password_again:
+            self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+            self.cur = self.db.cursor()
+
+            self.cur.execute(''' UPDATE users SET users_name=%s, user_email=%s, users_password=%s WHERE users_name=%s'''
+                             ,(username, email, password, login_name))
+
+            self.db.commit()
+            self.statusBar().showMessage('User Date Updated')
+        else:
+            self.statusBar().showMessage('Please Enter Same Password for both fields')
+
+
+
+
+
+
+
+
 
     ############################################
     #  Functions for for user Bar #
@@ -355,6 +392,34 @@ class MainApp(QMainWindow, ui):
         for publisher in combodata:
             self.comboBox_14.addItem(publisher[0])
             self.comboBox_6.addItem(publisher[0])
+
+
+    ############################################
+    #  Functions for themes
+    ############################################
+
+    def dark_orange(self):
+        style = open('themes/dark_orange.css', 'r')
+        style = style.read()
+        self.setStyleSheet(style)
+
+
+    def darkstyle(self):
+        style = open('themes/blueM.css', 'r')
+        style = style.read()
+        self.setStyleSheet(style)
+
+
+    def maincss(self):
+        style = open('themes/style1.css', 'r')
+        style = style.read()
+        self.setStyleSheet(style)
+
+    def createdcss(self):
+        style = open('themes/created.css', 'r')
+        style = style.read()
+        self.setStyleSheet(style)
+
 
 
 
