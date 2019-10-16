@@ -47,8 +47,12 @@ class MainApp(QMainWindow, ui):
         self.pushButton_14.clicked.connect(self.addCategory)
         self.pushButton_15.clicked.connect(self.addAuthor)
         self.pushButton_16.clicked.connect(self.addPublisher)
-
         self.pushButton_9.clicked.connect(self.searchBooks)
+        self.pushButton_8.clicked.connect(self.editBooks)
+        self.pushButton_10.clicked.connect(self.deleteBooks)
+
+        self.pushButton_11.clicked.connect(self.addNewUser)
+        self.pushButton_12.clicked.connect(self.login)
 
     def Show_Themes(self):
         self.groupBox_3.show()
@@ -108,10 +112,41 @@ class MainApp(QMainWindow, ui):
         self.lineEdit_12.setText('')
 
     def editBooks(self):
-        pass
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+        book_title = self.lineEdit_4.text()
+        book_description = self.textEdit_2.toPlainText()
+        book_code = self.lineEdit_7.text()
+        book_category = self.comboBox_7.currentIndex()
+        book_author = self.comboBox_8.currentIndex()
+        book_publisher = self.comboBox_6.currentIndex()
+        book_price = self.lineEdit_8.text()
+
+        search_term = self.lineEdit_3.text()
+        self.statusBar().showMessage( search_term + ' Updated')
+
+        self.cur.execute('''
+        UPDATE book SET book_name=%s,book_description=%s,book_code=%s,book_category=%s,book_price=%s,book_author=%s,book_publisher=%s
+        WHERE book_name =%s ''',
+        (book_title, book_description, book_code, book_category,book_author, book_publisher, book_price,  search_term))
+
+        self.db.commit()
+
 
     def deleteBooks(self):
-        pass
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+        todelete = self.lineEdit_3.text()
+        warning = QMessageBox.warning(self, 'Delete Book', 'Are you sure you want to delete this book?', QMessageBox.Yes | QMessageBox.No)
+        if warning == QMessageBox.Yes:
+            SQL = '''DELETE FROM book WHERE book_name=%s'''
+            self.cur.execute(SQL, [todelete])
+            self.db.commit()
+            self.statusBar().showMessage(todelete + ' Successfully Deleted')
+
+
 
     def searchBooks(self):
         self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
@@ -123,14 +158,13 @@ class MainApp(QMainWindow, ui):
         self.cur.execute(SQL, [book_title])
 
         data = self.cur.fetchone()
-        print(data)
 
         self.lineEdit_4.setText(data[1])
         self.textEdit_2.setPlainText(data[2])
         self.lineEdit_7.setText(data[3])
-        self.comboBox_7.setCurrentIndex(4)
-        self.comboBox_8.setCurrentIndex(6)
-        self.comboBox_6.setCurrentIndex(7)
+        self.comboBox_7.setCurrentIndex(data[4])
+        self.comboBox_8.setCurrentIndex(data[6])
+        self.comboBox_6.setCurrentIndex(data[7])
         self.lineEdit_8.setText(str(data[5]))
 
 
@@ -138,11 +172,42 @@ class MainApp(QMainWindow, ui):
     #  Functions for for user Bar
     ############################################
 
+
     def addNewUser(self):
-        pass
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+
+        username = self.lineEdit_16.text()
+        email = self.lineEdit_17.text()
+        password = self.lineEdit_15.text()
+        password_again = self.lineEdit_14.text()
+
+        if password == password_again:
+            self.cur.execute(''' INSERT INTO users (users_name, user_email, users_password)
+            VALUES (%s, %s, %s)''' , (username , email , password))
+
+            self.db.commit()
+            self.statusBar().showMessage(username + ' added successfully')
+
+        else:
+            self.statusBar().showMessage(' Please Enter a Valid password ')
+
 
     def login(self):
-        pass
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+
+        usernme = self.lineEdit_18.text()
+        password = self.lineEdit_19.text()
+
+        SQL = ''' SELECT users_name, users_password FROM users '''
+        self.cur.execute(SQL)
+        data = self.cur.fetchall()
+        for dat in data:
+            if usernme == dat[0] and password == dat[1]:
+                self.statusBar().showMessage('New User Added')
 
     def EditUser(self):
         pass
