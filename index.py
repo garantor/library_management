@@ -16,6 +16,7 @@ class MainApp(QMainWindow, ui):
         self.setupUi(self)
         self.Handle_UI()
         self.Handle_button()
+        self.maincss()
 
         ####################
         self.Show_author()
@@ -41,6 +42,7 @@ class MainApp(QMainWindow, ui):
         self.pushButton_5.clicked.connect(self.Books_tab)
         self.pushButton_4.clicked.connect(self.Users_tab)
         self.pushButton_3.clicked.connect(self.settings_Tab)
+        self.pushButton_26.clicked.connect(self.client_tab)
 
         #######################################################
         self.pushButton_7.clicked.connect(self.addNewBooks)
@@ -60,6 +62,11 @@ class MainApp(QMainWindow, ui):
         self.pushButton_20.clicked.connect(self.maincss)
         self.pushButton_19.clicked.connect(self.createdcss)
 
+        self.pushButton_22.clicked.connect(self.add_new_Client)
+        self.pushButton_25.clicked.connect(self.delete_clients)
+        self.pushButton_24.clicked.connect(self.search_client)
+        self.pushButton_23.clicked.connect(self.edit_client)
+
 
     def Show_Themes(self):
         self.groupBox_3.show()
@@ -78,11 +85,16 @@ class MainApp(QMainWindow, ui):
     def Books_tab(self):
         self.tabWidget.setCurrentIndex(1)
 
-    def Users_tab(self):
+    def client_tab(self):
         self.tabWidget.setCurrentIndex(2)
 
-    def settings_Tab(self):
+
+
+    def Users_tab(self):
         self.tabWidget.setCurrentIndex(3)
+
+    def settings_Tab(self):
+        self.tabWidget.setCurrentIndex(4)
 
     ############################################
     #  Functions for Books tabs
@@ -240,6 +252,88 @@ class MainApp(QMainWindow, ui):
             self.statusBar().showMessage('User Date Updated')
         else:
             self.statusBar().showMessage('Please Enter Same Password for both fields')
+
+    ############################################
+    #  clients functions #
+    ############################################
+
+    def add_new_Client(self):
+        client_name = self.lineEdit_9.text()
+        client_email = self.lineEdit_24.text()
+        client_nationalID = self.lineEdit_25.text()
+
+
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+        self.cur.execute('''
+        INSERT INTO client(client_name, client_email, client_National_ID)
+        VALUES (%s, %s, %s)
+        ''', (client_name, client_email, client_nationalID,))
+        self.db.commit()
+        self.db.close()
+        print('added')
+        self.statusBar().showMessage('User Added ')
+
+
+    def show_all_client(self):
+        pass
+
+
+    def edit_client(self):
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+        new_id = self.lineEdit_10.text()
+        client_new_name = self.lineEdit_26.text()
+        client_new_email = self.lineEdit_27.text()
+        client_New_id = self.lineEdit_28.text()
+
+        self.cur.execute('''
+            UPDATE client SET client_name = %s , client_email = %s , client_National_ID = %s WHERE client_National_ID =%s
+        ''', (client_new_name, client_new_email, client_New_id, new_id))
+
+        self.db.commit()
+        self.db.close()
+        self.statusBar().showMessage('User Edited added')
+
+       
+
+    def delete_clients(self):
+        delete_new_id = self.lineEdit_10.text()
+
+        Warning_message = QMessageBox.warning(self, 'DELETE USERS', 'Are you Sure you want to delete Client', QMessageBox.Yes | QMessageBox.No)
+
+        if Warning_message == QMessageBox.Yes:
+
+            self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+            self.cur = self.db.cursor()
+
+            SQL = '''
+                DELETE FROM client WHERE client_National_ID = %s
+            '''
+            self.cur.execute(SQL, [delete_new_id])
+            self.db.commit()
+            self.db.close()
+            self.statusBar().showMessage('Client Deleted')
+
+
+
+
+    def search_client(self):
+        client_national = self.lineEdit_10.text()
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+        sql = '''SELECT * FROM client WHERE client_National_ID = %s '''
+
+        self.cur.execute(sql, [client_national])
+        data = self.cur.fetchone()
+
+        self.lineEdit_26.setText(data[1])
+        self.lineEdit_27.setText(data[2])
+        self.lineEdit_28.setText(data[3])
+
 
 
 
