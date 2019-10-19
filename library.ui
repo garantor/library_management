@@ -30,7 +30,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
@@ -245,17 +245,22 @@
         </column>
         <column>
          <property name="text">
-          <string>Book Code</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
           <string>Book Description</string>
          </property>
         </column>
         <column>
          <property name="text">
+          <string>Book Code</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
           <string>Book Category</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Book price</string>
          </property>
         </column>
         <column>
@@ -266,11 +271,6 @@
         <column>
          <property name="text">
           <string>Book Publisher</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Book price</string>
          </property>
         </column>
        </widget>
@@ -292,9 +292,9 @@
        <widget class="QLabel" name="label_3">
         <property name="geometry">
          <rect>
-          <x>210</x>
+          <x>190</x>
           <y>30</y>
-          <width>82</width>
+          <width>91</width>
           <height>31</height>
          </rect>
         </property>
@@ -646,7 +646,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_12">
        <attribute name="title">
