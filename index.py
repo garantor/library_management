@@ -1,6 +1,7 @@
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+import datetime
 
 import sys
 import pymysql
@@ -68,6 +69,7 @@ class MainApp(QMainWindow, ui):
         self.pushButton_25.clicked.connect(self.delete_clients)
         self.pushButton_24.clicked.connect(self.search_client)
         self.pushButton_23.clicked.connect(self.edit_client)
+        self.pushButton_6.clicked.connect(self.Handle_daily_op)
 
 
     def Show_Themes(self):
@@ -98,6 +100,28 @@ class MainApp(QMainWindow, ui):
     def settings_Tab(self):
         self.tabWidget.setCurrentIndex(4)
 
+
+
+      ############################################
+    #  Functions for daily operations #
+    ############################################
+
+    def Handle_daily_op(self):
+        book_name =self.lineEdit.text()
+        book_type= self.comboBox.currentText()
+        days =self.comboBox_2.currentText() #need to add +1
+        date = str(datetime.date.today())
+
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+        self.cur.execute(''' INSERT INTO day_operation (book_name, type, days, date)
+        VALUES (%s, %s, %s, %s) 
+         ''' , (book_name, book_type, days, date))
+
+        self.db.commit()
+        self.statusBar().showMessage('NEW OPERATIONS ADDED')
+
     ############################################
     #  Functions for Books tabs
     ############################################
@@ -127,10 +151,11 @@ class MainApp(QMainWindow, ui):
         self.lineEdit_2.setText('')
         self.textEdit.setPlainText('')
         self.lineEdit_11.setText('')
-        self.comboBox_12.setCurrentText(0)
-        self.comboBox_13.setCurrentText(0)
-        self.comboBox_14.setCurrentText(0)
+        self.comboBox_12.setCurrentText(str(0))
+        self.comboBox_13.setCurrentText(str(0))
+        self.comboBox_14.setCurrentText(str(0))
         self.lineEdit_12.setText('')
+        self.show_all_book()
 
     def editBooks(self):
         self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
@@ -153,6 +178,7 @@ class MainApp(QMainWindow, ui):
         (book_title, book_description, book_code, book_category, book_price, book_author, book_publisher,  search_term))
 
         self.db.commit()
+        self.show_all_book()
 
 
     def deleteBooks(self):
@@ -166,18 +192,19 @@ class MainApp(QMainWindow, ui):
             self.cur.execute(SQL, [todelete])
             self.db.commit()
             self.statusBar().showMessage(todelete + ' Successfully Deleted')
+            self.show_all_book()
+
+        
 
 
     def show_all_book(self):
         self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
         self.cur = self.db.cursor()
 
-        self.cur.execute(''' SELECT  book_name, book_code, book_category, book_price, book_author, book_publisher  FROM book''')
+        self.cur.execute(''' SELECT  book_name, book_description, book_code, book_category, book_price, book_author, book_publisher  FROM book''')
         data = self.cur.fetchall()
 
-        print(data)
-
-
+        self.tableWidget_5.setRowCount(0)
         self.tableWidget_5.insertRow(0)
 
         for row, form in enumerate(data):
@@ -298,6 +325,7 @@ class MainApp(QMainWindow, ui):
         self.db.commit()
         self.db.close()
         self.statusBar().showMessage('User Added ')
+        self.show_all_client()
 
 
     def show_all_client(self):
@@ -307,6 +335,7 @@ class MainApp(QMainWindow, ui):
         self.cur.execute(''' SELECT client_name, client_email, client_National_ID  FROM client''')
         data = self.cur.fetchall()
 
+        self.tableWidget_6.setRowCount(0)
         self.tableWidget_6.insertRow(0)
 
         for row, form in enumerate(data):
@@ -336,6 +365,7 @@ class MainApp(QMainWindow, ui):
         self.db.commit()
         self.db.close()
         self.statusBar().showMessage('User Edited added')
+        self.show_all_client()
 
        
 
@@ -356,6 +386,7 @@ class MainApp(QMainWindow, ui):
             self.db.commit()
             self.db.close()
             self.statusBar().showMessage('Client Deleted')
+            self.show_all_client()
 
 
 
@@ -373,6 +404,7 @@ class MainApp(QMainWindow, ui):
         self.lineEdit_26.setText(data[1])
         self.lineEdit_27.setText(data[2])
         self.lineEdit_28.setText(data[3])
+
 
 
 

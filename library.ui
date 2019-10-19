@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1191</width>
-    <height>521</height>
+    <height>572</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>80</x>
       <y>0</y>
-      <width>1111</width>
-      <height>521</height>
+      <width>1121</width>
+      <height>551</height>
      </rect>
     </property>
     <property name="font">
@@ -30,7 +30,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
@@ -47,32 +47,27 @@
       </property>
       <column>
        <property name="text">
-        <string>Books</string>
+        <string>Book Name</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Book Title</string>
+        <string>Client</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Book Author</string>
+        <string>Type</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Book Publisher</string>
+        <string>From</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Book Category</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Book Price</string>
+        <string>To</string>
        </property>
       </column>
      </widget>
@@ -219,7 +214,7 @@
         <x>0</x>
         <y>0</y>
         <width>1101</width>
-        <height>471</height>
+        <height>521</height>
        </rect>
       </property>
       <property name="currentIndex">
@@ -232,15 +227,15 @@
        <widget class="QTableWidget" name="tableWidget_5">
         <property name="geometry">
          <rect>
-          <x>-10</x>
+          <x>40</x>
           <y>0</y>
-          <width>1101</width>
-          <height>441</height>
+          <width>1061</width>
+          <height>491</height>
          </rect>
         </property>
         <column>
          <property name="text">
-          <string>Book Name</string>
+          <string>    Book Name</string>
          </property>
         </column>
         <column>
@@ -642,7 +637,7 @@
         <x>0</x>
         <y>0</y>
         <width>1121</width>
-        <height>461</height>
+        <height>541</height>
        </rect>
       </property>
       <property name="currentIndex">
@@ -655,10 +650,10 @@
        <widget class="QTableWidget" name="tableWidget_6">
         <property name="geometry">
          <rect>
-          <x>-10</x>
+          <x>40</x>
           <y>0</y>
-          <width>1101</width>
-          <height>441</height>
+          <width>1071</width>
+          <height>511</height>
          </rect>
         </property>
         <column>
@@ -1656,10 +1651,10 @@
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
-      <x>880</x>
+      <x>890</x>
       <y>-40</y>
       <width>311</width>
-      <height>581</height>
+      <height>591</height>
      </rect>
     </property>
     <property name="styleSheet">
