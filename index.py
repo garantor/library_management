@@ -172,9 +172,12 @@ class MainApp(QMainWindow, ui):
         self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
         self.cur = self.db.cursor()
 
-        self.cur.execute(''' SELECT book_name, book_description, book_code, book_category, book_price, book_author, book_publisher FROM book ''')
+        self.cur.execute(''' SELECT  book_name, book_code, book_category, book_price, book_author, book_publisher  FROM book''')
         data = self.cur.fetchall()
-                
+
+        print(data)
+
+
         self.tableWidget_5.insertRow(0)
 
         for row, form in enumerate(data):
@@ -183,7 +186,7 @@ class MainApp(QMainWindow, ui):
                 colum += 1
 
             row_position = self.tableWidget_5.rowCount()
-            self.tableWidget.insertRow(row_position)
+            self.tableWidget_5.insertRow(row_position)
 
         self.db.close()
         
