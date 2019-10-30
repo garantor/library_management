@@ -1,17 +1,58 @@
+# This Python file uses the following encoding: utf-8
+
+import os
+import sys
+
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 import datetime
-
-import sys
+from xlrd import *
+from xlsxwriter import *
 import pymysql
+from library import *
+from login import *
+
 
 
 from PyQt5.uic import loadUiType
 
-ui,_ = loadUiType('library.ui')
+#ui,_ = loadUiType('library.ui')
+#login,_ = loadUiType('login.ui')
 
-class MainApp(QMainWindow, ui):
+
+class Login(QWidget, Ui_Form):
+    def __init__(self):
+        QWidget.__init__(self)
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.MainLogin)
+        style = open('themes/style1.css', 'r')
+        style = style.read()
+        self.setStyleSheet(style)
+
+
+    def MainLogin(self):
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+        usernme = self.lineEdit.text()
+        password = self.lineEdit_2.text()
+
+        SQL = ''' SELECT * FROM users '''
+        self.cur.execute(SQL)
+        data = self.cur.fetchall()
+        for dat in data:
+            if usernme == dat[1] and password == dat[3]:
+                self.window2 = MainApp()
+                self.close()
+                self.window2.show()
+                
+            else:
+                self.label.setText('Please Enter Correct Details to Login')
+
+
+
+class MainApp(QMainWindow, Ui_MainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.setupUi(self)
@@ -29,6 +70,7 @@ class MainApp(QMainWindow, ui):
         self.Show_category_combobox()
         self.Show_author_combobox()
         self.Show_publisher_combobox()
+        self.show_all_ops()
 
 
     def Handle_UI(self):
@@ -71,6 +113,102 @@ class MainApp(QMainWindow, ui):
         self.pushButton_23.clicked.connect(self.edit_client)
         self.pushButton_6.clicked.connect(self.Handle_daily_op)
 
+        self.pushButton_27.clicked.connect(self.Export_day_ops)
+        self.pushButton_29.clicked.connect(self.Export_Books)
+        self.pushButton_28.clicked.connect(self.Export_client)
+
+
+
+       ############################################
+    #  Export to csv/excel
+    ############################################
+    def Export_day_ops(self):
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+        self.cur.execute('''
+            SELECT book_name, client_name, type, date, to_date FROM day_operation
+        ''')
+        data = self.cur.fetchall()
+
+
+        wbook = Workbook('day_operations.xlsx')
+        sheet1 = wbook.add_worksheet()
+
+        sheet1.write(0,0, 'book_title')
+        sheet1.write(0,1, 'Client Name')
+        sheet1.write(0,2, 'Book Type')
+        sheet1.write(0,3, 'From - Date')
+        sheet1.write(0,4, 'To - date')
+
+        row_num = 1
+        for row in data:
+            colum_number =0
+            for item in row:
+                sheet1.write(row_num, colum_number, str(item))
+                colum_number +=1
+            row_num += 1
+        wbook.close()
+        self.statusBar().showMessage('Report Generated')
+         
+
+    def Export_client(self):
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+        self.cur.execute(''' SELECT client_name, client_email, client_National_ID  FROM client''')
+        data = self.cur.fetchall()
+
+        wbook = Workbook('All_Ckients.xlsx')
+        sheet1 = wbook.add_worksheet()
+
+        sheet1.write(0,0, 'Client Name')
+        sheet1.write(0,1, 'Client Email')
+        sheet1.write(0,2, 'Client National Id')
+
+        row_num = 1
+        for row in data:
+            colum_number =0
+            for item in row:
+                sheet1.write(row_num, colum_number, str(item))
+                colum_number +=1
+            row_num += 1
+        wbook.close()
+        self.statusBar().showMessage('Client Report Generated')
+
+
+    def Export_Books(self):
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+        self.cur.execute(''' SELECT  book_name, book_description, book_code, book_category, book_price, book_author, book_publisher  FROM book''')
+        data = self.cur.fetchall()
+
+        wbook = Workbook('All_books.xlsx')
+        sheet1 = wbook.add_worksheet()
+
+        sheet1.write(0,0, 'Book_name')
+        sheet1.write(0,1, 'Book Description')
+        sheet1.write(0,2, 'Book Code')
+        sheet1.write(0,3, 'book Category')
+        sheet1.write(0,4, 'Book Price')
+        sheet1.write(0,5, 'Book Publisher')
+        sheet1.write(0,6, 'Book Author')
+
+
+        row_num = 1
+        for row in data:
+            colum_number =0
+            for item in row:
+                sheet1.write(row_num, colum_number, str(item))
+                colum_number +=1
+            row_num += 1
+        wbook.close()
+        self.statusBar().showMessage('Book Report Generated')
+
+
+
+
 
     def Show_Themes(self):
         self.groupBox_3.show()
@@ -108,19 +246,47 @@ class MainApp(QMainWindow, ui):
 
     def Handle_daily_op(self):
         book_name =self.lineEdit.text()
+        client_name = self.lineEdit_29.text()
         book_type= self.comboBox.currentText()
-        days =self.comboBox_2.currentText() #need to add +1
-        date = str(datetime.date.today())
+        number_of_days =self.comboBox_2.currentIndex() + 1
+        date_collect = datetime.date.today()
+        todays =date_collect + datetime.timedelta(days=int(number_of_days)) 
+
 
         self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
         self.cur = self.db.cursor()
 
-        self.cur.execute(''' INSERT INTO day_operation (book_name, type, days, date)
-        VALUES (%s, %s, %s, %s) 
-         ''' , (book_name, book_type, days, date))
+        self.cur.execute(''' INSERT INTO day_operation (book_name, client_name, type, days, date, to_date)
+        VALUES (%s, %s, %s, %s, %s, %s) 
+         ''' , (book_name, client_name, book_type, number_of_days, date_collect, todays))
 
         self.db.commit()
         self.statusBar().showMessage('NEW OPERATIONS ADDED')
+        self.show_all_ops()
+
+
+    def show_all_ops(self):
+        self.db = pymysql.connect(host='localhost', user='root', password='Sunlabi001.', db='library')
+        self.cur = self.db.cursor()
+
+        self.tableWidget.setRowCount(0)
+        self.tableWidget.insertRow(0)
+
+        self.cur.execute('''
+            SELECT book_name, client_name, type, date, to_date FROM day_operation
+        ''')
+
+        data = self.cur.fetchall()
+        for row, form in enumerate(data):
+            for colum , item in enumerate(form):
+                self.tableWidget.setItem(row, colum, QTableWidgetItem(str(item)))
+                colum += 1
+
+            row_position = self.tableWidget.rowCount()
+            self.tableWidget.insertRow(row_position)
+
+
+
 
     ############################################
     #  Functions for Books tabs
@@ -584,7 +750,7 @@ class MainApp(QMainWindow, ui):
 
 def main():
     app =QApplication(sys.argv)
-    window = MainApp()
+    window = Login()
     window.show()
     app.exec_()
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1191</width>
-    <height>572</height>
+    <height>601</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>90</x>
       <y>0</y>
       <width>1121</width>
-      <height>551</height>
+      <height>601</height>
      </rect>
     </property>
     <property name="font">
@@ -39,7 +39,7 @@
      <widget class="QTableWidget" name="tableWidget">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>10</x>
         <y>80</y>
         <width>1051</width>
         <height>381</height>
@@ -74,8 +74,8 @@
      <widget class="QPushButton" name="pushButton_6">
       <property name="geometry">
        <rect>
-        <x>710</x>
-        <y>30</y>
+        <x>800</x>
+        <y>20</y>
         <width>91</width>
         <height>31</height>
        </rect>
@@ -100,7 +100,7 @@
      <widget class="QComboBox" name="comboBox">
       <property name="geometry">
        <rect>
-        <x>280</x>
+        <x>470</x>
         <y>30</y>
         <width>73</width>
         <height>22</height>
@@ -120,7 +120,7 @@
      <widget class="QComboBox" name="comboBox_2">
       <property name="geometry">
        <rect>
-        <x>540</x>
+        <x>650</x>
         <y>30</y>
         <width>73</width>
         <height>21</height>
@@ -180,7 +180,7 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>410</x>
         <y>30</y>
         <width>55</width>
         <height>16</height>
@@ -193,7 +193,7 @@
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>490</x>
+        <x>600</x>
         <y>30</y>
         <width>55</width>
         <height>21</height>
@@ -201,6 +201,38 @@
       </property>
       <property name="text">
        <string>Days</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_29">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>30</y>
+        <width>171</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="placeholderText">
+       <string>Enter Client Name</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_27">
+      <property name="geometry">
+       <rect>
+        <x>840</x>
+        <y>480</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Export Operations  to CSV</string>
       </property>
      </widget>
     </widget>
@@ -213,8 +245,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1101</width>
-        <height>521</height>
+        <width>1121</width>
+        <height>471</height>
        </rect>
       </property>
       <property name="currentIndex">
@@ -227,9 +259,9 @@
        <widget class="QTableWidget" name="tableWidget_5">
         <property name="geometry">
          <rect>
-          <x>40</x>
+          <x>0</x>
           <y>0</y>
-          <width>1061</width>
+          <width>1111</width>
           <height>491</height>
          </rect>
         </property>
@@ -626,6 +658,25 @@
        </widget>
       </widget>
      </widget>
+     <widget class="QPushButton" name="pushButton_29">
+      <property name="geometry">
+       <rect>
+        <x>870</x>
+        <y>490</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Export Books Data to CSV</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_11">
      <attribute name="title">
@@ -650,10 +701,10 @@
        <widget class="QTableWidget" name="tableWidget_6">
         <property name="geometry">
          <rect>
-          <x>40</x>
+          <x>0</x>
           <y>0</y>
           <width>1071</width>
-          <height>511</height>
+          <height>431</height>
          </rect>
         </property>
         <column>
@@ -671,6 +722,25 @@
           <string>Client ID</string>
          </property>
         </column>
+       </widget>
+       <widget class="QPushButton" name="pushButton_28">
+        <property name="geometry">
+         <rect>
+          <x>860</x>
+          <y>440</y>
+          <width>231</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Export Client Data to CSV</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tab_13">
@@ -1654,7 +1724,7 @@
       <x>890</x>
       <y>-40</y>
       <width>311</width>
-      <height>591</height>
+      <height>541</height>
      </rect>
     </property>
     <property name="styleSheet">
