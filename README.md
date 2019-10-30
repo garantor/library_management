@@ -1,4 +1,4 @@
-# Inventory_management
+# Library management
 
 Library Management software for managing library.
 
