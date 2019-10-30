@@ -38,3 +38,11 @@ This a Library Managment Software that Helps manage library Operations, Catelogs
 You can Run the git clone command on you machine within your already created Virtual Enviroment and simply run the Index file from your commandline or Terminal after cloning
 python index.py
 
+### Please do not forget to use your own local mysql password in the space to create and connect to the mysql database
+
+# ScreenShot
+
+![](P1.jpg)
+![](P2.jpg)
+![](P3.jpg)
+
