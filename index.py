@@ -9,6 +9,10 @@ from PyQt5.QtGui import *
 import datetime
 from xlrd import *
 from xlsxwriter import *
+<<<<<<< HEAD
+=======
+import sys
+>>>>>>> 12b3db2a8bf6a96e33cbafc7631c0037fa0ee392
 import pymysql
 from library import *
 from login import *
@@ -17,11 +21,19 @@ from login import *
 
 from PyQt5.uic import loadUiType
 
+<<<<<<< HEAD
 #ui,_ = loadUiType('library.ui')
 #login,_ = loadUiType('login.ui')
 
 
 class Login(QWidget, Ui_Form):
+=======
+ui,_ = loadUiType('library.ui')
+login,_ = loadUiType('login.ui')
+
+
+class Login(QWidget, login):
+>>>>>>> 12b3db2a8bf6a96e33cbafc7631c0037fa0ee392
     def __init__(self):
         QWidget.__init__(self)
         self.setupUi(self)
@@ -50,6 +62,10 @@ class Login(QWidget, Ui_Form):
             else:
                 self.label.setText('Please Enter Correct Details to Login')
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 12b3db2a8bf6a96e33cbafc7631c0037fa0ee392
 
 
 class MainApp(QMainWindow, Ui_MainWindow):
