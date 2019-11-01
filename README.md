@@ -24,7 +24,7 @@ This a Library Managment Software that Helps manage library Operations, Catelogs
 
 ---
 
-## Prerequsite 
+## Requirements
 
 * Install Python 3.7.3
 * PyQt5==5.11.3
