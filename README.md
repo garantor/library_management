@@ -41,34 +41,13 @@ python index.py
 ### Please do not forget to use your own local mysql password in the space to create and connect to the mysql database
 
 # ScreenShot
----
 
 ![](P1.jpg)
-
----
-
 ![](P2.jpg)
-
----
-
 ![](P3.jpg)
-
----
-
 ![](P4.jpg)
-
----
-
 ![](P5.jpg)
-
----
-
 ![](P6.jpg)
-
----
-
 ![](P7.jpg)
-
----
 
 # ENJOY
