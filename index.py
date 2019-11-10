@@ -35,7 +35,7 @@ class Login(QWidget, login):
 
 
     def MainLogin(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         usernme = self.lineEdit.text()
@@ -126,7 +126,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
     #  Export to csv/excel
     ############################################
     def Export_day_ops(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute('''
@@ -156,7 +156,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
          
 
     def Export_client(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute(''' SELECT client_name, client_email, client_National_ID  FROM client''')
@@ -181,7 +181,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def Export_Books(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute(''' SELECT  book_name, book_description, book_code, book_category, book_price, book_author, book_publisher  FROM book''')
@@ -256,7 +256,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
         todays =date_collect + datetime.timedelta(days=int(number_of_days)) 
 
 
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute(''' INSERT INTO day_operation (book_name, client_name, type, days, date, to_date)
@@ -269,7 +269,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def show_all_ops(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.tableWidget.setRowCount(0)
@@ -296,7 +296,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
     ############################################
 
     def addNewBooks(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
 
@@ -327,7 +327,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
         self.show_all_book()
 
     def editBooks(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         book_title = self.lineEdit_4.text()
@@ -351,7 +351,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def deleteBooks(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         todelete = self.lineEdit_3.text()
@@ -363,11 +363,8 @@ class MainApp(QMainWindow, Ui_MainWindow):
             self.statusBar().showMessage(todelete + ' Successfully Deleted')
             self.show_all_book()
 
-        
-
-
     def show_all_book(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute(''' SELECT  book_name, book_description, book_code, book_category, book_price, book_author, book_publisher  FROM book''')
@@ -389,7 +386,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def searchBooks(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         book_title = self.lineEdit_3.text()
@@ -414,7 +411,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def addNewUser(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
 
@@ -435,7 +432,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def login(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
 
@@ -463,7 +460,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
         login_name = self.lineEdit_18.text()
 
         if password == password_again:
-            self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+            self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
             self.cur = self.db.cursor()
 
             self.cur.execute(''' UPDATE users SET users_name=%s, user_email=%s, users_password=%s WHERE users_name=%s'''
@@ -484,7 +481,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
         client_nationalID = self.lineEdit_25.text()
 
 
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute('''
@@ -498,7 +495,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def show_all_client(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute(''' SELECT client_name, client_email, client_National_ID  FROM client''')
@@ -519,7 +516,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def edit_client(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         new_id = self.lineEdit_10.text()
@@ -545,7 +542,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
         if Warning_message == QMessageBox.Yes:
 
-            self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+            self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
             self.cur = self.db.cursor()
 
             SQL = '''
@@ -562,7 +559,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
     def search_client(self):
         client_national = self.lineEdit_10.text()
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         sql = '''SELECT * FROM client WHERE client_National_ID = %s '''
@@ -583,7 +580,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def addCategory(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         category_name = self.lineEdit_5.text()
@@ -598,7 +595,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
         self.Show_category_combobox()
 
     def Show_category(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute(''' SELECT category_name FROM category ''')
@@ -618,7 +615,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def addAuthor(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         author_name = self.lineEdit_6.text()
@@ -633,7 +630,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
         self.Show_author_combobox()
 
     def Show_author(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute(''' SELECT author_name FROM author ''')
@@ -651,7 +648,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
                 self.tableWidget_3.insertRow(row_postion)
 
     def addPublisher(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         p_name = self.lineEdit_13.text()
@@ -664,7 +661,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
         self.Show_publisher_combobox()
 
     def Show_Publisher(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute(''' SELECT publisher_name FROM publisher ''')
@@ -684,7 +681,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def Show_category_combobox(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute(''' SELECT category_name FROM category ''')
@@ -697,7 +694,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def Show_author_combobox(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute(''' SELECT author_name FROM author ''')
@@ -710,7 +707,7 @@ class MainApp(QMainWindow, Ui_MainWindow):
 
 
     def Show_publisher_combobox(self):
-        self.db = pymysql.connect(host='localhost', user='root', password='# Your Password Goes Here in String#, db='library')
+        self.db = pymysql.connect(host='localhost', user='root', password=PASSWORD, db='library')
         self.cur = self.db.cursor()
 
         self.cur.execute(''' SELECT publisher_name FROM publisher ''')
