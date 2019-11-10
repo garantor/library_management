@@ -45,9 +45,9 @@ python index.py
 ![](P1.jpg)
 ![](P2.jpg)
 ![](P3.jpg)
-![](P4.jpg)
-![](P5.jpg)
-![](P6.jpg)
+![](p4.jpg)
+![](p5.jpg)
+![](p6.jpg)
 ![](P7.jpg)
 
 # ENJOY
